@@ -10,7 +10,6 @@ class Directory {
   addSearchInput() {
     searchContainer.innerHTML = `<form action="#" method="get">
         <input type="search" id="search-input" class="search-input" placeholder="Start typing to search...">
-        <!--<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">-->
     </form>`;
 
     document.querySelector('#search-input').addEventListener('keyup', () => {
@@ -20,11 +19,17 @@ class Directory {
   }
 
   displayRandomEmployees() {
-    // Loop through all employees and show as card with user information
+    // Loop through all employees, show card with user info
     this.employees.forEach((employee, index) => {
       let employeeCard = document.createElement('div');
       employeeCard.className = 'card';
       employeeCard.setAttribute('employee', index);
+
+      // Add vent listener to card
+      employeeCard.addEventListener('click', (e) => {
+        //directory.showModal();
+        console.log(e.target.parentNode);
+      });;
 
       let html =
         `<div class="card-img-container">
@@ -38,6 +43,8 @@ class Directory {
 
       employeeCard.innerHTML = html;
       gallery.append(employeeCard);
+
+
     });
   }
 
@@ -52,39 +59,38 @@ class Directory {
   }
 
   search (query) {
-
+    let cardName = document.querySelectorAll('.card .card-name');
     let matchedArray = Array();
 
-    let cardName = document.querySelectorAll('.card .card-name');
+    cardName.forEach((name, index) => {
 
-
-    cardName.forEach((name) => {
-      console.log(name);
-      if(name.textContent.match(query)) {
-        //name.parentNode.querySelector('.card').style.display = 'none';
-        let highlighted = name.textContent.replace(query, '<span style="background-color: yellow;">'+ query +'</span>');
+      if(name.textContent.indexOf(query) !== -1) {
+        // Highlight matching keywords in card names
+        let highlighted = name.textContent.replace(query, `<span class="highlighted">${query}</span>`);
         name.innerHTML = highlighted;
-        console.log(cardName);
+        // Add cards with matching names to matchedArray
+        matchedArray.push(index);
       }
-
-
-
     });
-
-
-
-
-    console.log(cardName);
-
-
-
-
+    this.filter(matchedArray);
   }
 
-  filter () {
+  filter (array) {
+    let cards = document.querySelectorAll('.card');
 
+    cards.forEach((card, index) => {
+      card.style.display = 'none';
+      if (array.includes(index)) {
+        card.style.display = 'flex';
+      }
+    });
   }
 
+  clearFilter () {
+    let cards = document.querySelectorAll('.card');
 
+    cards.forEach((card) => card.style.display = 'flex');
+
+  }
 
 }
