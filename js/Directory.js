@@ -9,9 +9,10 @@ class Directory {
 
 
   addSearchInput() {
-    searchContainer.innerHTML = `<form action="#" method="get">
-        <input type="search" id="search-input" class="search-input" placeholder="Start typing to search...">
-    </form>`;
+    searchContainer.innerHTML =
+      `<form action="#" method="GET">
+        <input type="search" id="search-input" class="search-input" placeholder="Search by name...">
+      </form>`;
 
     document.querySelector('#search-input').addEventListener('keyup', () => {
       let searchValue = document.querySelector('#search-input').value;
@@ -55,7 +56,6 @@ class Directory {
 
       // Add event listener to card
       employeeCard.addEventListener('click', (e) => {
-        //directory.showModal();
         let target = e.target.parentNode.parentNode.getAttribute('class');
         let modalID;
 
@@ -71,7 +71,7 @@ class Directory {
           modalID = e.target.getAttribute('employee');
         }
 
-        person.current = modalID;
+        person.current = Number(modalID);
         this.updateModal();
         this.showModal();
       });;
@@ -86,35 +86,40 @@ class Directory {
 
     let html =
       `<div class="modal">
-              <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-              <div class="modal-info-container">
-                  <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
-                  <h3 id="name" class="modal-name name cap">name</h3>
-                  <p class="modal-text email">email</p>
-                  <p class="modal-text city cap">city</p>
-                  <hr>
-                  <p class="modal-text phone">(555) 555-5555</p>
-                  <p class="modal-text address">123 Portland Ave., Portland, OR 97204</p>
-                  <p class="modal-text birthday">Birthday: 10/21/2015</p>
-              </div>
+        <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+          <div class="modal-info-container">
+            <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
+              <h3 id="name" class="modal-name name cap"></h3>
+              <p class="modal-text email"></p>
+              <hr>
+              <p class="modal-text phone"></p>
+              <p class="modal-text address cap"></p>
+              <p class="modal-text birthday"></p>
           </div>
+      </div>
 
-          // IMPORTANT: Below is only for exceeds tasks
-          <div class="modal-btn-container">
-              <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-              <button type="button" id="modal-next" class="modal-next btn">Next</button>
-          </div>`;
+      <div class="modal-btn-container">
+        <button type="button" id="modal-prev" class="btn modal-prev">Prev</button>
+        <button type="button" id="modal-next" class="btn modal-next">Next</button>
+      </div>`;
 
     modal.innerHTML = html;
     gallery.append(modal);
 
-    // Add modal event listeners
+    // Add event listeners for modal buttons
     document.querySelector('#modal-close-btn').addEventListener('click', (e) => {
       this.hideModal();
     });
 
+    document.querySelector('.modal-btn-container').addEventListener('click', (e) => {
+      let btnID = e.target.getAttribute('id');
 
-
+      if (btnID === 'modal-prev') {
+        person.showPrev();
+      } else if (btnID === 'modal-next') {
+        person.showNext();
+      }
+    });
   }
 
 
@@ -122,27 +127,18 @@ class Directory {
 
     let current = person.current;
 
-    console.log(this.employees[current]);
-
     document.querySelector('.modal-img').setAttribute('src', this.employees[current].picture.large);
 
-    document.querySelector('.modal-name').textContent =
-      `${this.employees[current].name.title}. ${this.employees[current].name.first} ${this.employees[current].name.last}`;
+    addModalInfo('.modal-name', `${this.employees[current].name.title}. ${this.employees[current].name.first} ${this.employees[current].name.last}`);
 
-    document.querySelector('.modal-text.email').textContent = this.employees[current].email;
+    addModalInfo('.modal-text.email', this.employees[current].email);
 
-    document.querySelector('.modal-text.city').textContent = this.employees[current].location.city;
+    addModalInfo('.modal-text.phone', this.employees[current].cell);
 
-    document.querySelector('.modal-text.phone').textContent = this.employees[current].cell;
+    addModalInfo('.modal-text.address', `${this.employees[current].location.street}, ${this.employees[current].location.city}, ${this.employees[current].location.state} ${this.employees[current].location.postcode}`);
 
-    document.querySelector('.modal-text.address').textContent = this.employees[current].cell;
-
-    document.querySelector('.modal-text.address').textContent =
-      `${this.employees[current].location.street}, ${this.employees[current].location.city}, ${this.employees[current].location.state} ${this.employees[current].location.postcode}`;
-
-    document.querySelector('.modal-text.birthday').textContent =
-      `Birthday: ${person.formatDate(this.employees[current].dob.date)}
-      (${this.employees[current].dob.age} yrs)`;
+    addModalInfo('.modal-text.birthday', `<strong>Birthday:</strong> ${person.formatDate(this.employees[current].dob.date)}
+      (${this.employees[current].dob.age} yrs)`);
   }
 
 
@@ -156,26 +152,37 @@ class Directory {
   }
 
 
+  handleModalButtons() {
+    /*
+    console.log(index);
+    if ((index - 1) <= 0) {
+      document.querySelector('.btn.modal-prev').disabled = true;
+      document.querySelector('.btn.modal-prev').className = 'btn modal-prev btn-disabled';
+    } else {
+      document.querySelector('.btn.modal-prev').disabled = false;
+      document.querySelector('.btn.modal-prev').className = 'btn modal-prev';
+    }
+    */
+  }
+
+
   search (query) {
     let cardName = document.querySelectorAll('.card .card-name');
-    let matchedArray = Array();
+    matchedArray = Array();
 
+    // Check if card names match query. If so, add to matchedArray
     cardName.forEach((name, index) => {
-
       if(name.textContent.indexOf(query) !== -1) {
-        // Highlight matching keywords in card names
-        let highlighted = name.textContent.replace(query, `<span class="highlighted">${query}</span>`);
-        name.innerHTML = highlighted;
-        // Add cards with matching names to matchedArray
         matchedArray.push(index);
       }
     });
+
     this.filter(matchedArray);
   }
 
 
   filter (array) {
-    // Display cards that has matching index of array values
+    // Show those cards that have a matching index value from array values
     let cards = document.querySelectorAll('.card');
 
     cards.forEach((card, index) => {

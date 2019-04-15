@@ -28,14 +28,14 @@ header {
 
 header h1 {
     font-size: 2em;
-    color: rgb(23, 32, 42);
+    color: rgb(72, 201, 176);
     margin-top: 35px;
 		margin-bottom: 5px;
 }
 
 header h2 {
 	font-size: 1.2em;
-	color: rgb(23, 32, 42);
+	color: rgba(23, 32, 42, 0.8);
 	margin-top: 0px;
 }
 
@@ -222,6 +222,11 @@ header h2 {
     transition: .4s ease-out;
     outline: none;
   }
+
+	.btn-disabled {
+		background: rgb(230, 230, 230) !important;
+		box-shadow: none !important;
+	}
 
 
 /* =====================================
