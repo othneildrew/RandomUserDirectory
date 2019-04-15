@@ -4,8 +4,8 @@
 **/
 class Person {
 
-  constructor (current) {
-    this.current = current;
+  constructor () {
+    this.current = null;
   }
 
   showNext () {

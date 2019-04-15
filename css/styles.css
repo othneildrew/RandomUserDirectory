@@ -2,8 +2,6 @@
    Public API Request
 ======================================== */
 
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 * {
 	box-sizing: border-box;
 }
@@ -126,13 +124,18 @@ header h2 {
     text-transform: capitalize;
 }
 
+.highlighted {
+	background-color: rgb(247, 220, 111);
+}
+
 
 /* =====================================
    Modal
 ======================================== */
 
 .modal-container {
-    position: fixed;
+		display: none;
+		position: fixed;
     top: 0;
     right: 0;
     bottom: 0;

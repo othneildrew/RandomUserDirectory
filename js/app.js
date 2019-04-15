@@ -4,7 +4,8 @@ FSJS Project 5 - Public API Requests
 ******************************************/
 const searchContainer = document.querySelector('.search-container');
 const gallery = document.querySelector('#gallery');
-let directory, employee;
+let directory;
+let person = new Person();
 
 init();
 
@@ -22,7 +23,7 @@ init();
 
 
 
-
+// FUNCTIONS
 
 /***
   * Fetches and return json formatted data from a given url
@@ -44,10 +45,9 @@ function init() {
       directory = new Directory(data.results);
       directory.addSearchInput();
       directory.displayRandomEmployees();
+      directory.createModal();
     })
     .catch((error) => console.log('An error occurred while fetching the data: ', error.message))
-
-
 
 
 
@@ -60,19 +60,6 @@ function init() {
 
 
 
+// EVENT LISTENERS
 
-
-
-
-
-
-
-
-
-
-
-
-document.querySelector('#gallery').addEventListener('click', (e) => {
-  //directory.showModal();
-  console.log(e.target);
-});
+//document.querySelector('#').addEventListener();
