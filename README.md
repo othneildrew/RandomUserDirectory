@@ -33,7 +33,6 @@
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 
 
 
@@ -81,7 +80,7 @@ The original project files were provided by [Treehouse](https://teamtreehouse.co
   * Color Theme
   * Card style (borders, color, hover)
   * Modal style (buttons, border)
-  * Button style (color, disable state)
+  * Button style (color, hover, disable state)
 
 
 
@@ -121,4 +120,4 @@ Project Link: [https://github.com/othneildrew/RandomUserDirectory](https://githu
 [license-url]: https://choosealicense.com/licenses/mit
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: https://raw.githubusercontent.com/othneildrew/othneildrew.github.io/master/images/projects/random-user-directory-.jpg
+[product-screenshot]: https://raw.githubusercontent.com/othneildrew/othneildrew.github.io/master/images/projects/random-user-directory.jpg

@@ -219,20 +219,21 @@ header h2 {
     display: inline-block;
     cursor: pointer;
     font-size: 0.85em;
+		font-weight: 600;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.9);
 		margin-top: .4em;
     padding: 0.75em 1.5em;
-    background: rgb(72, 201, 176);
+    background: rgba(72, 201, 176, 0.8);
     border: none;
-		box-shadow: 3px 5px 5px rgba(0, 0, 0, .1);
-    transition: .4s ease-out;
+		box-shadow: 1px 2px 2px rgba(0, 0, 0, .1);
+    transition: .2s ease-out;
     outline: none;
   }
 
 	.btn-disabled {
-		background: rgb(230, 230, 230) !important;
-		box-shadow: none !important;
+			background: rgb(230, 230, 230) !important;
+			box-shadow: none !important;
 	}
 
 	.btn-disabled:hover {
@@ -290,7 +291,14 @@ header h2 {
     }
 
     .btn:hover {
-        background: rgba(255, 255, 255, 1);
-        color: rgba(25, 25, 25, 1);
+				box-shadow: none;
+				background: rgba(72, 201, 176, 1);
+				color: rgb(240, 240, 240);
     }
+
+		.btn-disabled {
+			box-shadow: none !important;
+			background: rgb(230, 230, 230) !important;
+			color: white !important;
+		}
 }
