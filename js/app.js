@@ -40,7 +40,7 @@ function fetchData(url) {
 function init() {
 
   // Fetch 12 random users and create new directory
-  fetchData('https://randomuser.me/api/?results=12&exc=login,registered,id&nat=us,es&noinfo')
+  fetchData('https://randomuser.me/api/?results=12&exc=login,registered,id&nat=us&noinfo')
     .then(data => {
       directory = new Directory(data.results);
       directory.addSearchInput();

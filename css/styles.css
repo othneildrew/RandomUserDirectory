@@ -164,7 +164,13 @@ header h2 {
     background: none;
     outline: none;
 		border: none;
+		border-radius: 50%;
 		font-size: 1.5em;
+		transition: all 0.4s;
+}
+
+.modal-close-btn:hover {
+	background-color: rgb(245, 245, 245);
 }
 
 .modal-img {
@@ -260,6 +266,7 @@ header h2 {
     .card:hover {
         background: rgba(255, 255, 255, 1);
         border: 1px solid rgba(50, 50, 50, 0.9);
+				box-shadow: 3px 10px 15px rgba(0, 0, 0, 0.2);
     }
 
     .card:hover .card-text {

@@ -8,23 +8,22 @@ class Person {
     this.current = null;
   }
 
+
   showNext () {
 
 
   }
+
 
   showPrevious () {
 
 
   }
 
-  getAge() {
 
+  formatDate (date) {
+    date = new Date(date);
+    return new Intl.DateTimeFormat('en-US').format(date);
   }
-
-
-
-
-
 
 }

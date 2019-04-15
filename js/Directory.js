@@ -72,6 +72,7 @@ class Directory {
         }
 
         person.current = modalID;
+        this.updateModal();
         this.showModal();
       });;
     });
@@ -108,7 +109,7 @@ class Directory {
     gallery.append(modal);
 
     // Add modal event listeners
-    document.querySelector('#modal-close-btn').addEventListener('click', () => {
+    document.querySelector('#modal-close-btn').addEventListener('click', (e) => {
       this.hideModal();
     });
 
@@ -117,14 +118,36 @@ class Directory {
   }
 
 
+  updateModal() {
+
+    let current = person.current;
+
+    console.log(this.employees[current]);
+
+    document.querySelector('.modal-img').setAttribute('src', this.employees[current].picture.large);
+
+    document.querySelector('.modal-name').textContent =
+      `${this.employees[current].name.title}. ${this.employees[current].name.first} ${this.employees[current].name.last}`;
+
+    document.querySelector('.modal-text.email').textContent = this.employees[current].email;
+
+    document.querySelector('.modal-text.city').textContent = this.employees[current].location.city;
+
+    document.querySelector('.modal-text.phone').textContent = this.employees[current].cell;
+
+    document.querySelector('.modal-text.address').textContent = this.employees[current].cell;
+
+    document.querySelector('.modal-text.address').textContent =
+      `${this.employees[current].location.street}, ${this.employees[current].location.city}, ${this.employees[current].location.state} ${this.employees[current].location.postcode}`;
+
+    document.querySelector('.modal-text.birthday').textContent =
+      `Birthday: ${person.formatDate(this.employees[current].dob.date)}
+      (${this.employees[current].dob.age} yrs)`;
+  }
+
+
   showModal() {
-
-
-
-
     document.querySelector('.modal-container').style.display = 'block';
-
-
   }
 
 
