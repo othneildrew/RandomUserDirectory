@@ -77,6 +77,7 @@ class Directory {
         person.current = Number(modalID);
         this.updateModal();
         this.showModal();
+        this.handleModalButtonState();
       });;
     });
   }
@@ -155,17 +156,58 @@ class Directory {
   }
 
 
-  handleModalButtons() {
-    /*
-    console.log(index);
-    if ((index - 1) <= 0) {
-      document.querySelector('.btn.modal-prev').disabled = true;
-      document.querySelector('.btn.modal-prev').className = 'btn modal-prev btn-disabled';
-    } else {
-      document.querySelector('.btn.modal-prev').disabled = false;
-      document.querySelector('.btn.modal-prev').className = 'btn modal-prev';
-    }
-    */
+  handleModalButtonState() {
+    let modalBtns = document.querySelectorAll('.modal-btn-container > .btn');
+
+
+
+
+    modalBtns.forEach(button => {
+      console.log(button);
+
+      console.log(matchedArray);
+
+      let current = person.current;
+
+      if (matchedArray.length > 0) {
+        let index = matchedArray.indexOf(current);
+
+        if ((index - 1) < 0) {
+          document.querySelector('.btn.modal-prev').disabled = true;
+          document.querySelector('.btn.modal-prev').className = 'btn modal-prev btn-disabled';
+        } else {
+          document.querySelector('.btn.modal-prev').disabled = false;
+          document.querySelector('.btn.modal-prev').className = 'btn modal-prev';
+        }
+
+        if ((index + 1) > matchedArray.length - 1) {
+          document.querySelector('.btn.modal-next').disabled = true;
+          document.querySelector('.btn.modal-next').className = 'btn modal-next btn-disabled';
+        } else {
+          document.querySelector('.btn.modal-next').disabled = false;
+          document.querySelector('.btn.modal-next').className = 'btn modal-next';
+        }
+      } else {
+
+        if ((current - 1) < 0) {
+          document.querySelector('.btn.modal-prev').disabled = true;
+          document.querySelector('.btn.modal-prev').className = 'btn modal-prev btn-disabled';
+        } else {
+          document.querySelector('.btn.modal-prev').disabled = false;
+          document.querySelector('.btn.modal-prev').className = 'btn modal-prev';
+        }
+
+        if ((current + 1) > this.employees.length - 1) {
+          document.querySelector('.btn.modal-next').disabled = true;
+          document.querySelector('.btn.modal-next').className = 'btn modal-next btn-disabled';
+        } else {
+          document.querySelector('.btn.modal-next').disabled = false;
+          document.querySelector('.btn.modal-next').className = 'btn modal-next';
+        }
+
+      }
+
+    });
   }
 
 

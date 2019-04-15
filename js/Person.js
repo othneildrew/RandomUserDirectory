@@ -27,6 +27,7 @@ class Person {
         directory.updateModal();
       }
     }
+    directory.handleModalButtonState();
   }
 
 
@@ -48,6 +49,7 @@ class Person {
         directory.updateModal();
       }
     }
+    directory.handleModalButtonState();
   }
 
 
