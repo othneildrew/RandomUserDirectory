@@ -12,8 +12,11 @@ class Directory {
     searchContainer.innerHTML =
       `<form action="#" method="GET">
         <input type="search" id="search-input" class="search-input" placeholder="Search by name...">
+        <p class="search-errors"></p>
       </form>`;
 
+
+    // Add event listeners to search input
     document.querySelector('#search-input').addEventListener('keyup', () => {
       let searchValue = document.querySelector('#search-input').value;
       this.search(searchValue);
@@ -182,7 +185,15 @@ class Directory {
 
 
   filter (array) {
-    // Show those cards that have a matching index value from array values
+    let searchErrors = document.querySelector('.search-errors');
+
+    if (array.length <= 0) {
+      searchErrors.textContent = 'No results found';
+    } else {
+      searchErrors.textContent = '';
+    }
+
+    // Show those cards that have a matching index value from array
     let cards = document.querySelectorAll('.card');
 
     cards.forEach((card, index) => {
