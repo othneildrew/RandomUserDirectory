@@ -12,7 +12,7 @@
   <p align="center">
     An employee directory with modal and search functionality for Awesome Startup, Inc a fictional company of creative web developers!
     <br />
-    <a href="https://www.othneildrew.com/othneildrew/RandomUserDirectory"><strong>View Demo »</strong></a>
+    <a href="https://www.othneildrew.com/RandomUserDirectory"><strong>View Demo »</strong></a>
     <br />
     <br />
     <a href="https://github.com/othneildrew/RandomUserDirectory/issues">Report Bug</a>
