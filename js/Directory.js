@@ -9,6 +9,7 @@ class Directory {
 
 
   addSearchInput() {
+    // Add search input to DOM
     searchContainer.innerHTML =
       `<form action="#" method="GET">
         <input type="search" id="search-input" class="search-input" placeholder="Search by name...">
@@ -62,7 +63,7 @@ class Directory {
         let target = e.target.parentNode.parentNode.getAttribute('class');
         let modalID;
 
-        // DOM traversal based on target that triggered event
+        // Traverse DOM based on event target
         if (target === 'card') {
           modalID = e.target.parentNode.parentNode.getAttribute('employee');
         }
@@ -128,7 +129,7 @@ class Directory {
 
 
   updateModal() {
-
+    // Update modal content with current employee's info
     let current = person.current;
 
     document.querySelector('.modal-img').setAttribute('src', this.employees[current].picture.large);
@@ -157,56 +158,40 @@ class Directory {
 
 
   handleModalButtonState() {
+    // Disable/Enable modal prev/next buttons based on index position of current user viewing
     let modalBtns = document.querySelectorAll('.modal-btn-container > .btn');
 
-
-
-
     modalBtns.forEach(button => {
-      console.log(button);
-
-      console.log(matchedArray);
-
       let current = person.current;
 
       if (matchedArray.length > 0) {
         let index = matchedArray.indexOf(current);
 
         if ((index - 1) < 0) {
-          document.querySelector('.btn.modal-prev').disabled = true;
-          document.querySelector('.btn.modal-prev').className = 'btn modal-prev btn-disabled';
+          disableBtn('modal-prev', true);
         } else {
-          document.querySelector('.btn.modal-prev').disabled = false;
-          document.querySelector('.btn.modal-prev').className = 'btn modal-prev';
+          disableBtn('modal-prev', false);
         }
 
         if ((index + 1) > matchedArray.length - 1) {
-          document.querySelector('.btn.modal-next').disabled = true;
-          document.querySelector('.btn.modal-next').className = 'btn modal-next btn-disabled';
+          disableBtn('modal-next', true);
         } else {
-          document.querySelector('.btn.modal-next').disabled = false;
-          document.querySelector('.btn.modal-next').className = 'btn modal-next';
+          disableBtn('modal-next', false);
         }
       } else {
 
         if ((current - 1) < 0) {
-          document.querySelector('.btn.modal-prev').disabled = true;
-          document.querySelector('.btn.modal-prev').className = 'btn modal-prev btn-disabled';
+          disableBtn('modal-prev', true);
         } else {
-          document.querySelector('.btn.modal-prev').disabled = false;
-          document.querySelector('.btn.modal-prev').className = 'btn modal-prev';
+          disableBtn('modal-prev', false);
         }
 
         if ((current + 1) > this.employees.length - 1) {
-          document.querySelector('.btn.modal-next').disabled = true;
-          document.querySelector('.btn.modal-next').className = 'btn modal-next btn-disabled';
+          disableBtn('modal-next', true);
         } else {
-          document.querySelector('.btn.modal-next').disabled = false;
-          document.querySelector('.btn.modal-next').className = 'btn modal-next';
+          disableBtn('modal-next', false);
         }
-
       }
-
     });
   }
 
@@ -215,7 +200,7 @@ class Directory {
     let cardName = document.querySelectorAll('.card .card-name');
     matchedArray = Array();
 
-    // Check if card names match query. If so, add to matchedArray
+    // If card names match query add to matchedArray
     cardName.forEach((name, index) => {
       if(name.textContent.indexOf(query) !== -1) {
         matchedArray.push(index);
@@ -229,13 +214,14 @@ class Directory {
   filter (array) {
     let searchErrors = document.querySelector('.search-errors');
 
+    // If 'array' is empty, display that not results found
     if (array.length <= 0) {
       searchErrors.textContent = 'No results found';
     } else {
       searchErrors.textContent = '';
     }
 
-    // Show those cards that have a matching index value from array
+    // Show cards that have a matching index value from 'array'
     let cards = document.querySelectorAll('.card');
 
     cards.forEach((card, index) => {

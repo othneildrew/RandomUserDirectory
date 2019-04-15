@@ -45,3 +45,18 @@ function fetchData(url) {
 function addModalInfo(selector, value) {
   document.querySelector(selector).innerHTML = value;
 }
+
+
+/***
+  * Disable/Enable a given button based on 'disabled' boolean value
+  **/
+function disableBtn(selector, disabled) {
+  if (disabled) {
+    document.getElementById(selector).disabled = true;
+    document.getElementById(selector).className = `btn ${selector} btn-disabled`;
+  } else {
+    document.getElementById(selector).disabled = false;
+    document.getElementById(selector).className = `btn ${selector}`;
+
+  }
+}

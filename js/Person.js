@@ -10,7 +10,9 @@ class Person {
 
 
   showPrev () {
+    // Show employee info with index value before current if the index is anything, but less than 0
     if (matchedArray.length > 0) {
+      // Use 'matchedArray' if it isn't empty from search
       let index = matchedArray.indexOf(this.current);
 
       if (index !== 0) {
@@ -20,6 +22,7 @@ class Person {
       }
 
     } else {
+      // If no search performed, use Directory.employees
       let employeeID = this.current - 1;
 
       if (employeeID >= 0) {
@@ -32,7 +35,9 @@ class Person {
 
 
   showNext () {
+    // Show employee info with index value after current if the index is anything, but greater than the specified length
     if (matchedArray.length > 0) {
+      // Use 'matchedArray' if it isn't empty from search
       let index = matchedArray.indexOf(this.current);
 
       if (index !== matchedArray.length - 1) {
@@ -42,6 +47,7 @@ class Person {
       }
 
     } else {
+      // If no search performed, use Directory.employees
       let employeeID = this.current + 1;
 
       if (employeeID <= directory.employees.length - 1) {
@@ -54,6 +60,7 @@ class Person {
 
 
   formatDate (date) {
+    // Formats date: MM/DD/YYYY
     date = new Date(date);
     return new Intl.DateTimeFormat('en-US').format(date);
   }

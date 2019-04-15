@@ -81,6 +81,7 @@ The original project files were provided by [Treehouse](https://teamtreehouse.co
   * Color Theme
   * Card style (borders, color, hover)
   * Modal style (buttons, border)
+  * Button style (color, disable state)
 
 
 
